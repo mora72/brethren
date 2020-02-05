@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+
+{% block title %}Brethren{% endblock %}
+
+{% block content %}
+<div class="offset-1 col-10 lista-div">
+    <h2>Irmãos Reunidos</h2>
+    <ul class="lista-irmaos">
+        {% for irmao in listairmaos %}
+            <li class="item-irmaos">
+                <span><a href="/irmao/{{irmao.id}}">{{irmao.nome}} / {{irmao.local}}</a></span>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+</html>
