@@ -7,6 +7,35 @@
 {% block content %}
 <div class="offset-1 col-10 lista-div">
     <h2>Localidades com Reuniões</h2>
+    <!-- Configuração da ação do filtro -->
+    <div class="col-12 filteruf-div">
+        <span>Filtrar UF:</span>
+        <select name="filteruf" id="filteruf" class="form-control">
+            <option value="*">Todos</option>
+            {% if filterufatual == 'SP' %}
+                <option value="SP" selected>São Paulo</option>
+            {% else %}
+                <option value="SP">São Paulo</option>
+            {% endif %}
+            {% if filterufatual == 'MG' %}
+                <option value="MG" selected>Minas Gerais</option>
+            {% else %}
+                <option value="MG">Minas Gerais</option>
+            {% endif %}
+            {% if filterufatual == 'RJ' %}
+                <option value="RJ" selected>Rio de Janeiro</option>
+            {% else %}
+                <option value="RJ">Rio de Janeiro</option>
+            {% endif %}
+        </select>
+    </div>
+    <!-- Configuração da ação do botão search -->
+    <div class="col-9 search-div">
+        <form method="GET" id="search-form">
+            <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome da cidade para buscar..." value="{{ request.GET.search }}"> <!-- value aqui apresenta o que o usuário digitou para não apagar depois que ele digitar enter ou clicar na lupinha -->
+            <i class="fas fa-search" id="search-btn"></i>
+        </form>
+    </div>
     <ul class="lista-locais">
         {% for local in listalocais %}
             <li class="item-locais">

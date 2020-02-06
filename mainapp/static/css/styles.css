@@ -19,6 +19,10 @@
 .navbar-nav {
     margin: auto;
 }
+/* coloca bold no botão principal (brand) */
+.navbar-brand {
+    font-weight: bold;
+}
 /* coloca cor e espaçamento das letras nas opções do navbar */
 .navbar-light .navbar-nav a.nav-link {
     color: blue;
@@ -26,14 +30,23 @@
     font-size: 17px;
     font-weight: bold
 }
+
+
 .lista-div {
+    padding: 0;
+}
+
+.localview-div {
     padding: 0;
 }
 
 h2 {
     font-size: 25px;
     font-weight: bold;
+    margin-left: 10px;
 }
+
+/* Lista de locais */
 
 .lista-locais {
     padding-left: 0;
@@ -48,15 +61,46 @@ h2 {
     border-bottom: 1px dashed #CCC;
 }
 
+/* Lista de irmaos */
+
 .lista-irmaos {
     padding-left: 0;
 }
 
 .item-irmaos {
     list-style: none;
-    font-size: 14px;
+    font-size: 17px;
     height: 50px;
     padding: 0 15px;
     padding-top: 10px;
     border-bottom: 1px dashed #CCC;
+}
+
+/* filter */
+.filteruf-div {
+    margin-bottom: 15px;
+    padding: 0;
+    margin-left: 10px;
+}
+
+#filteruf {
+    display: inline-block;
+    width: 200px;
+    margin-left: 10px;
+}
+
+/* Search */
+
+.fas.fa-search {
+    position: absolute;
+    top: 12px;
+    right: 26px;
+    cursor: pointer; /* pointer para a lupa */
+}
+
+.search-div {
+    padding: 0;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    display: inline-block;
 }
