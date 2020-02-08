@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Local, Irmao
-from .forms import LocalForm
+from .forms import LocalForm, IrmaoForm
 
 
 def main_menu(request):
@@ -19,6 +19,12 @@ def main_menu(request):
 def irmaos_view(request):
     lista_irmaos = Irmao.objects.all().order_by('criado')
     return render(request, 'mainapp/irmaos.html', {'listairmaos': lista_irmaos})
+
+
+def irmaos_id_view(request, idirmao):
+    irmao = get_object_or_404(Irmao, pk=idirmao)
+    form = IrmaoForm(instance=irmao)
+    return render(request, 'mainapp/irmaoview.html', {'form': form, 'irmao': irmao})
 
 
 def local_view(request, idlocal):

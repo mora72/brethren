@@ -10,7 +10,9 @@
     <ul class="lista-irmaos">
         {% for irmao in listairmaos %}
             <li class="item-irmaos">
-                <span><a href="/irmao/{{irmao.id}}">{{irmao.nome}} / {{irmao.local}}</a></span>
+                <img src="{{irmao.imagefoto.url}}" width="40"/>
+                <span><a href="/irmao/{{irmao.id}}">{{irmao.nome}} / {{irmao.local}} / {{irmao.cidade}} /
+                    {{irmao.uf}}</a></span>
             </li>
         {% endfor %}
     </ul>

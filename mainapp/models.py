@@ -63,7 +63,7 @@ class Irmao(models.Model):
     estadocivil = models.CharField(max_length=20, choices=opcoes_estado_civil, null=True, blank=True)
     telefonecontato = models.CharField(max_length=12, null=True, blank=True)
     emailcontato = models.CharField(max_length=50, null=True, blank=True)
-    fotolink = models.CharField(max_length=100, null=True, blank=True)
+    imagefoto = models.ImageField(upload_to='fotos', null=True, blank=True)
     status = models.CharField(max_length=3, choices=opcoesstatus)
     parentes = models.TextField(max_length=100, null=True, blank=True)
     observacoes = models.TextField(max_length=200, null=True, blank=True)
