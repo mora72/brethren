@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Local, Irmao
 from .forms import LocalForm, IrmaoForm
+from .modulosbrethren import calcula_distancia
 
 
 def main_menu(request):
@@ -16,9 +17,23 @@ def main_menu(request):
     return render(request, 'mainapp/locais.html', {'listalocais': lista_locais, 'filterufatual': filteruf})
 
 
+def local_view(request, idlocal):
+    local = get_object_or_404(Local, pk=idlocal)
+    form = LocalForm(instance=local)
+    return render(request, 'mainapp/localview.html', {'form': form, 'local': local})
+
+
 def irmaos_view(request):
-    lista_irmaos = Irmao.objects.all().order_by('criado')
-    return render(request, 'mainapp/irmaos.html', {'listairmaos': lista_irmaos})
+    searchirmao = request.GET.get('searchirmao')  # usa o name="search" informado no input do irmaos.html
+    filterstatus = request.GET.get('filterstatus')
+    if searchirmao:
+        lista_irmaos = Irmao.objects.filter(nome__icontains=searchirmao)
+        filterstatus = str(None)
+    elif (not filterstatus) or filterstatus == '*':
+        lista_irmaos = Irmao.objects.all().order_by('criado')
+    else:
+        lista_irmaos = Irmao.objects.filter(status=filterstatus)
+    return render(request, 'mainapp/irmaos.html', {'listairmaos': lista_irmaos, 'filterstatusatual': filterstatus})
 
 
 def irmaos_id_view(request, idirmao):
@@ -27,7 +42,12 @@ def irmaos_id_view(request, idirmao):
     return render(request, 'mainapp/irmaoview.html', {'form': form, 'irmao': irmao})
 
 
-def local_view(request, idlocal):
-    local = get_object_or_404(Local, pk=idlocal)
-    form = LocalForm(instance=local)
-    return render(request, 'mainapp/localview.html', {'form': form, 'local': local})
+def distancias(request):
+    local_interesse = request.GET.get('searchlocalinteresse')  # usa o local informado no input do distancias.html
+    lista_distancias = []
+    if local_interesse:
+        #  print(local_interesse)
+        uf_busca = 'SP'
+        lista_distancias = calcula_distancia(local_interesse, uf_busca)
+    return render(request, 'mainapp/distancias.html', {'listadistancias': lista_distancias,
+                                                       'localinteresse': local_interesse})

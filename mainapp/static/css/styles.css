@@ -81,7 +81,7 @@ h2 {
     border-bottom: 1px dashed #CCC;
 }
 
-/* filter */
+/* filter uf*/
 .filteruf-div {
     margin-bottom: 15px;
     padding: 0;
@@ -94,12 +94,26 @@ h2 {
     margin-left: 10px;
 }
 
+/* filter status*/
+.filterstatus-div {
+    margin-bottom: 15px;
+    padding: 0;
+    margin-left: 10px;
+}
+
+#filterstatus {
+    display: inline-block;
+    width: 200px;
+    margin-left: 10px;
+}
+
+
 /* Search */
 
 .fas.fa-search {
     position: absolute;
     top: 12px;
-    right: 26px;
+    right: 16px;
     cursor: pointer; /* pointer para a lupa */
 }
 
@@ -108,4 +122,28 @@ h2 {
     margin-left: 10px;
     margin-bottom: 15px;
     display: inline-block;
+    width: 400px;
+}
+
+.fas.fa-search {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    cursor: pointer; /* pointer para a lupa */
+}
+
+.searchirmao-div {
+    padding: 0;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+    width: 400px;
+}
+
+.searchlocalinteresse-div {
+    padding: 0;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+    width: 400px;
 }
