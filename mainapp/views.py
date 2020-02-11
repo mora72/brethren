@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Local, Irmao
+from .models import Local, Irmao, Uf
 from .forms import LocalForm, IrmaoForm
 from .modulosbrethren import calcula_distancia
 
@@ -7,14 +7,21 @@ from .modulosbrethren import calcula_distancia
 def main_menu(request):
     search = request.GET.get('search')  # usa o name="search" informado no input do locais.html
     filteruf = request.GET.get('filteruf')
+    if type(filteruf) is str:
+       filteruf = int(filteruf)
+    base_ufs = Uf.objects.all()
+    lista_locais = []
     if search:
         lista_locais = Local.objects.filter(nomelocal__icontains=search)
         filteruf = str(None)
-    elif (not filteruf) or filteruf == '*':
-        lista_locais = Local.objects.all().order_by('criado')
+    elif (not filteruf) or filteruf == 0:
+        if filteruf != 'undefined':
+            lista_locais = Local.objects.all().order_by('criado')
     else:
-        lista_locais = Local.objects.filter(uf=filteruf)
-    return render(request, 'mainapp/locais.html', {'listalocais': lista_locais, 'filterufatual': filteruf})
+        if filteruf != 'undefined':
+            lista_locais = Local.objects.filter(uf=filteruf)
+    return render(request, 'mainapp/locais.html', {'listalocais': lista_locais, 'filterufatual': filteruf,
+                                                   'listaufs': base_ufs})
 
 
 def local_view(request, idlocal):

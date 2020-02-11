@@ -2,6 +2,17 @@ from django.db import models
 from django.contrib.auth import get_user_model  # para usar o usuário do django como foreign key
 
 
+class Uf(models.Model):
+    uf = models.CharField(max_length=2)
+    nomeuf = models.CharField(max_length=20)
+
+    class Meta:
+        verbose_name_plural = 'UFs'
+
+    def __str__(self):
+        return self.nomeuf
+
+
 class Local(models.Model):
     opcoesstatus = (
         ('A', 'Assembléia'),
@@ -10,7 +21,7 @@ class Local(models.Model):
     nomelocal = models.CharField(max_length=50)
     statuslocal = models.CharField(max_length=1, choices=opcoesstatus, default='A')
     cidade = models.CharField(max_length=50)
-    uf = models.CharField(max_length=2)
+    uf = models.ForeignKey(Uf, on_delete=models.CASCADE)
     dataini = models.DateField(null=True, blank=True)
     irmaocontato = models.CharField(max_length=50, null=True, blank=True)
     telefonecontato = models.CharField(max_length=12, null=True, blank=True)
@@ -29,11 +40,6 @@ class Irmao(models.Model):
     opcoescontato = (
         ('S', 'Sim'),
         ('N', 'Não'),
-    )
-    opcoesuf = (
-        ('SP', 'São Paulo'),
-        ('MG', 'Minas Gerais'),
-        ('RJ', 'Rio de Janeiro'),
     )
     opcoesgenero = (
         ('F', 'Feminino'),
@@ -54,10 +60,10 @@ class Irmao(models.Model):
         ('VIU', 'Viúvo')
     )
     nome = models.CharField(max_length=100)
-    local = models.ForeignKey(Local, on_delete=models.DO_NOTHING)
+    local = models.ForeignKey(Local, on_delete=models.CASCADE)
     contatolocal = models.CharField(max_length=1, choices=opcoescontato, default='N')
     cidade = models.CharField(max_length=50)
-    uf = models.CharField(max_length=2, choices=opcoesuf)
+    uf = models.ForeignKey(Uf, on_delete=models.CASCADE)
     genero = models.CharField(max_length=1, choices=opcoesgenero)
     datanasc = models.DateField(null=True, blank=True)
     estadocivil = models.CharField(max_length=20, choices=opcoes_estado_civil, null=True, blank=True)

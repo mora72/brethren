@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
 {% extends 'base.html' %}
-
 {% block title %}Brethren{% endblock %}
 
 {% block content %}
@@ -11,22 +9,14 @@
     <div class="col-12 filteruf-div">
         <span>Filtrar UF:</span>
         <select name="filteruf" id="filteruf" class="form-control">
-            <option value="*">Todos</option>
-            {% if filterufatual == 'SP' %}
-                <option value="SP" selected>São Paulo</option>
-            {% else %}
-                <option value="SP">São Paulo</option>
-            {% endif %}
-            {% if filterufatual == 'MG' %}
-                <option value="MG" selected>Minas Gerais</option>
-            {% else %}
-                <option value="MG">Minas Gerais</option>
-            {% endif %}
-            {% if filterufatual == 'RJ' %}
-                <option value="RJ" selected>Rio de Janeiro</option>
-            {% else %}
-                <option value="RJ">Rio de Janeiro</option>
-            {% endif %}
+            <option value="0">Todos</option>
+            {% for ufitem in listaufs %}
+                {% if filterufatual == ufitem.id %}
+                    <option value="{{ ufitem.id }}" selected>{{ ufitem.nomeuf }}</option>
+                {% else %}
+                    <option value="{{ ufitem.id }}">{{ ufitem.nomeuf }}</option>
+                {% endif %}
+            {% endfor %}
         </select>
     </div>
     <!-- Configuração da ação do botão search -->
@@ -45,4 +35,3 @@
     </ul>
 </div>
 {% endblock %}
-</html>

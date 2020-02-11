@@ -1,5 +1,3 @@
-/* console.log('entrei js v3');*/
-
 $( document ).ready(function() {
 
     // configuração do filtro uf
