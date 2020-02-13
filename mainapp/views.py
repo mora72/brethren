@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Local, Irmao, Uf
+from .models import Local, Irmao, Uf, Distancia
 from .forms import LocalForm, IrmaoForm
 from .modulosbrethren import calcula_distancia
 
@@ -8,7 +8,7 @@ def main_menu(request):
     search = request.GET.get('search')  # usa o name="search" informado no input do locais.html
     filteruf = request.GET.get('filteruf')
     if type(filteruf) is str:
-       filteruf = int(filteruf)
+        filteruf = int(filteruf)
     base_ufs = Uf.objects.all()
     lista_locais = []
     if search:
@@ -53,8 +53,13 @@ def distancias(request):
     local_interesse = request.GET.get('searchlocalinteresse')  # usa o local informado no input do distancias.html
     lista_distancias = []
     if local_interesse:
-        #  print(local_interesse)
-        uf_busca = 'SP'
-        lista_distancias = calcula_distancia(local_interesse, uf_busca)
+        lista_distancias = calcula_distancia(local_interesse.strip().upper())
     return render(request, 'mainapp/distancias.html', {'listadistancias': lista_distancias,
                                                        'localinteresse': local_interesse})
+
+
+def teste(request):
+    new_uf = Uf(id=1)
+    new_distancia = Distancia(origem='origemteste', cidade_destino='cidadeteste', uf_destino=new_uf,
+                              distancia=10)
+    new_distancia.save()

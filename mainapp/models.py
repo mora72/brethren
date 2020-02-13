@@ -82,3 +82,17 @@ class Irmao(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+class Distancia(models.Model):
+    origem = models.CharField(max_length=50)
+    cidade_destino = models.CharField(max_length=50)
+    uf_destino = models.ForeignKey(Uf, on_delete=models.CASCADE)
+    distancia = models.IntegerField(max_length=5)
+
+    class Meta:
+        verbose_name_plural = 'Distâncias'
+
+    def __str__(self):
+        nome = f'{self.origem} / {self.cidade_destino} - {self.uf_destino}'
+        return nome

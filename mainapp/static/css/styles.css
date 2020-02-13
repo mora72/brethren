@@ -21,7 +21,8 @@
 }
 /* coloca bold no botão principal (brand) */
 .navbar-brand {
-    font-weight: bold;
+    font-family: 'Pacifico', cursive;
+    font-size: 30px;
 }
 /* coloca cor e espaçamento das letras nas opções do navbar */
 .navbar-light .navbar-nav a.nav-link {
