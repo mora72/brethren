@@ -5,33 +5,58 @@
 {% block content %}
 <div class="offset-1 col-10 lista-div">
     <h2>Localidades com Reuniões</h2>
-    <!-- Configuração da ação do filtro -->
-    <div class="col-12 filteruf-div">
-        <span>Filtrar UF:</span>
-        <select name="filteruf" id="filteruf" class="form-control">
-            <option value="0">Todos</option>
-            {% for ufitem in listaufs %}
-                {% if filterufatual == ufitem.id %}
-                    <option value="{{ ufitem.id }}" selected>{{ ufitem.nomeuf }}</option>
-                {% else %}
-                    <option value="{{ ufitem.id }}">{{ ufitem.nomeuf }}</option>
-                {% endif %}
+    <div class="flex-container">
+        <!-- Configuração da ação do filtro -->
+        <div class="col-12 column filteruf-div">
+            <span>Filtrar UF:</span>
+            <select name="filteruf" id="filteruf" class="form-control">
+                <option value="0">Todos</option>
+                {% for ufitem in listaufs %}
+                    {% if filterufatual == ufitem.id %}
+                        <option value="{{ ufitem.id }}" selected>{{ ufitem.nomeuf }}</option>
+                    {% else %}
+                        <option value="{{ ufitem.id }}">{{ ufitem.nomeuf }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <!-- Configuração da ação do botão search -->
+        <div class="col-9 column search-div">
+            <form method="GET" id="search-form">
+                <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome da cidade para buscar..." value="{{ request.GET.search }}"> <!-- value aqui apresenta o que o usuário digitou para não apagar depois que ele digitar enter ou clicar na lupinha -->
+                <i class="fas fa-search bot-search-local" id="search-btn"></i>
+            </form>
+        </div>
+    </div>
+    <div class="container lista-locais2">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nome do Local</th>
+                <th>Cidade</th>
+                <th>UF</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for local in listalocais %}
+            <tr>
+                <td><span><a href="/local/{{local.id}}">{{local.nomelocal}}</a></span></td>
+                <td>{{local.cidade}}</td>
+                <td>{{local.uf}}</td>
+            </tr>
             {% endfor %}
-        </select>
+            </tbody>
+        </table>
     </div>
-    <!-- Configuração da ação do botão search -->
-    <div class="col-9 search-div">
-        <form method="GET" id="search-form">
-            <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome da cidade para buscar..." value="{{ request.GET.search }}"> <!-- value aqui apresenta o que o usuário digitou para não apagar depois que ele digitar enter ou clicar na lupinha -->
-            <i class="fas fa-search" id="search-btn"></i>
-        </form>
-    </div>
-    <ul class="lista-locais">
+
+    <!-- <ul class="lista-locais">
         {% for local in listalocais %}
+
+
             <li class="item-locais">
                 <span><a href="/local/{{local.id}}">{{local.nomelocal}} / {{local.cidade}} / {{local.uf}}</a></span>
             </li>
         {% endfor %}
-    </ul>
+    </ul> -->
 </div>
 {% endblock %}
