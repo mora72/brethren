@@ -7,6 +7,13 @@
     margin: 0;
 }
 
+/* Tira asterísco dos campos obrigatórios */
+.asteriskField {
+    display: none;
+}
+
+
+
 /* Navbar */
 
 /* coloca border abaixo no navbar, e estabelece margem para o que vem abaixo */
@@ -47,10 +54,20 @@
 }
 
 
-h2 {
+.lista-div h2 {
     font-size: 25px;
     font-weight: bold;
     margin-left: 350px;
+}
+
+.localview-div h2 {
+    font-size: 23px;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-bottom: 30px;
+    padding: 0;
+    color: blue;
 }
 
 /* Lista de locais */

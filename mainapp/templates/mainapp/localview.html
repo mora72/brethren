@@ -4,11 +4,14 @@
 {% block title %}Localidade{% endblock %}
 
 {% block content %}
-<div class="offset-1 col-3 localview-div">
+<div class="offset-3 col-8 localview-div">
     <h2>Localidade: {{local.nomelocal}}</h2>
     <form method="POST">
         {% csrf_token %}
-        {{ form|crispy }}
+        {% crispy form %}
     </form>
+    <a id="btnvoltar" href="/">
+        <button type="button" class="btn btn-primary">Voltar</button>
+    </a>
 </div>
 {% endblock %}
