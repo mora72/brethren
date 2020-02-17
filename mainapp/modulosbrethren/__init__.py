@@ -25,7 +25,7 @@ def calcula_distancia(local_busca):
             destino = f'{x.cidade}, {x.uf}'
             dist = gmaps_distances(origem, destino)
             new_distancia = Distancia(origem=local_busca, cidade_destino=x.cidade, uf_destino=x.uf, distancia=dist)
-            new_distancia.save()
+            new_distancia.save()  # salva no DB a nova distância calculada
             #  print(f'Origem: {local_busca:<20} Destino: {x.nomelocal:<20} - {x.cidade:<20} Distância: {dist} KM')
         lista_dist_calc[x.nomelocal] = dist
     lista_dist_sorted = sorted(lista_dist_calc.items(), key=itemgetter(1))

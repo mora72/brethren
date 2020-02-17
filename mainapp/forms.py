@@ -17,7 +17,7 @@ class LocalForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Row(
-            Column('dataini', css_class='form-group col-md-4 mb-0'),
+                Column('dataini', css_class='form-group col-md-4 mb-0')
             ),
             Row(
                 Column('irmaocontato', css_class='form-group col-md-4 mb-0'),
@@ -46,8 +46,49 @@ class LocalForm(forms.ModelForm):
 
 
 class IrmaoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(IrmaoForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+
+        self.helper.layout = Layout(
+            Row(
+                Column('local', css_class='form-group col-md-3 mb-0'),
+                Column('cidade', css_class='form-group col-md-3 mb-0'),
+                Column('uf', css_class='form-group col-md-2 mb-0')
+            ),
+            Row(
+                Column('telefonecontato', css_class='form-group col-md-2 mb-0'),
+                Column('emailcontato', css_class='form-group col-md-4 mb-0')
+            ),
+            Row(
+                Column('genero', css_class='form-group col-md-2 mb-0'),
+                Column('estadocivil', css_class='form-group col-md-2 mb-0'),
+                Column('datanasc', css_class='form-group col-md-2 mb-0')
+            ),
+            Row(
+                Column('status', css_class='form-group col-md-3 mb-0')
+            )
+        )
+
+        for f in self.fields:
+            #  self.fields[f].label = _(self.fields[f].label)
+            if isinstance(self.fields[f].widget, Select):
+                self.fields[f].widget.attrs['disabled'] = 'disabled'
+            else:
+                self.fields[f].widget.attrs['readonly'] = 'readonly'
 
     class Meta:
         model = Irmao
-        fields = ('imagefoto', 'local', 'contatolocal', 'cidade', 'uf', 'genero', 'datanasc', 'estadocivil',
-                  'telefonecontato', 'emailcontato', 'status', 'parentes', 'observacoes')
+        fields = ('local', 'cidade', 'uf', 'genero', 'datanasc', 'estadocivil',
+                  'telefonecontato', 'emailcontato', 'status')
+        labels = {
+            'local': 'Localidade: ',
+            'cidade': 'Cidade: ',
+            'uf': 'UF: ',
+            'genero': 'Gênero: ',
+            'datanasc': 'Data Nascimento: ',
+            'estadocivik': 'Estado Civil: ',
+            'telefonecontato': 'Contato: ',
+            'emailcontato': 'Email: ',
+            'status': 'Situação: '
+        }

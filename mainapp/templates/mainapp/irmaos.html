@@ -5,56 +5,73 @@
 {% block title %}Brethren{% endblock %}
 
 {% block content %}
-<div class="offset-1 col-10 lista-div">
+<div class="offset-2 col-9 listairmaos-div">
     <h2>Irmãos Reunidos</h2>
-    <!-- Configuração da ação do filtro Status -->
-    <div class="col-12 filterstatus-div">
-        <span>Filtrar Status:</span>
-        <select name="filterstatus" id="filterstatus" class="form-control">
-            <option value="*">Todos</option>
-            {% if filterstatusatual == 'CAT' %}
-                <option value="CAT" selected>Comunhão Ativo</option>
-            {% else %}
-                <option value="CAT">Comunhão Ativo</option>
-            {% endif %}
-            {% if filterstatusatual == 'CAU' %}
-                <option value="CAU" selected>Comunhão Ausente</option>
-            {% else %}
-                <option value="CAU">Comunhão Ausente</option>
-            {% endif %}
-            {% if filterstatusatual == 'DIS' %}
-                <option value="DIS" selected>Disciplina</option>
-            {% else %}
-                <option value="DIS">Disciplina</option>
-            {% endif %}
-            {% if filterstatusatual == 'VIS' %}
-                <option value="VIS" selected>Visitante</option>
-            {% else %}
-                <option value="VIS">Visitante</option>
-            {% endif %}
-            {% if filterstatusatual == 'PEL' %}
-                <option value="PEL" selected>Pediu Lugar</option>
-            {% else %}
-                <option value="PEL">Pediu Lugar</option>
-            {% endif %}
-        </select>
+    <div class="flex-container">
+        <!-- Configuração da ação do filtro Status -->
+        <div class="col-4 filterstatus-div">
+            <span>Filtrar Status:</span>
+            <select name="filterstatus" id="filterstatus" class="form-control">
+                <option value="*">Todos</option>
+                {% if filterstatusatual == 'CAT' %}
+                    <option value="CAT" selected>Comunhão Ativo</option>
+                {% else %}
+                    <option value="CAT">Comunhão Ativo</option>
+                {% endif %}
+                {% if filterstatusatual == 'CAU' %}
+                    <option value="CAU" selected>Comunhão Ausente</option>
+                {% else %}
+                    <option value="CAU">Comunhão Ausente</option>
+                {% endif %}
+                {% if filterstatusatual == 'DIS' %}
+                    <option value="DIS" selected>Disciplina</option>
+                {% else %}
+                    <option value="DIS">Disciplina</option>
+                {% endif %}
+                {% if filterstatusatual == 'VIS' %}
+                    <option value="VIS" selected>Visitante</option>
+                {% else %}
+                    <option value="VIS">Visitante</option>
+                {% endif %}
+                {% if filterstatusatual == 'PEL' %}
+                    <option value="PEL" selected>Pediu Lugar</option>
+                {% else %}
+                    <option value="PEL">Pediu Lugar</option>
+                {% endif %}
+            </select>
+        </div>
+        <!-- Configuração da ação do botão search -->
+        <div class="col-4 searchirmao-div">
+            <form method="GET" id="searchirmao-form">
+                <input class="form-control" type="text" id="searchirmao" name="searchirmao" placeholder="Digite o nome para buscar..." value="{{ request.GET.searchirmao }}"> <!-- value aqui apresenta o que o usuário digitou para não apagar depois que ele digitar enter ou clicar na lupinha -->
+                <i class="fas fa-search bot-search-irmao" id="searchirmao-btn"></i>
+            </form>
+        </div>
     </div>
-    <!-- Configuração da ação do botão search -->
-    <div class="col-9 searchirmao-div">
-        <form method="GET" id="searchirmao-form">
-            <input class="form-control" type="text" id="searchirmao" name="searchirmao" placeholder="Digite o nome para buscar..." value="{{ request.GET.searchirmao }}"> <!-- value aqui apresenta o que o usuário digitou para não apagar depois que ele digitar enter ou clicar na lupinha -->
-            <i class="fas fa-search bot-search-irmao" id="searchirmao-btn"></i>
-        </form>
+    <div class="container lista-irmaos">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nome</th>
+                <th>Localidade</th>
+                <th>Cidade</th>
+                <th>UF</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for irmao in listairmaos %}
+            <tr>
+                <td><img src="{{irmao.imagefoto.url}}" width="35"/></td>
+                <td><span><a href="/irmao/{{irmao.id}}">{{irmao.nome}}</a></span></td>
+                <td>{{irmao.local}}</td>
+                <td>{{irmao.cidade}}</td>
+                <td>{{irmao.uf}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
-    <ul class="lista-irmaos">
-        {% for irmao in listairmaos %}
-            <li class="item-irmaos">
-                <img src="{{irmao.imagefoto.url}}" width="40"/>
-                <span><a href="/irmao/{{irmao.id}}">{{irmao.nome}} / {{irmao.local}} / {{irmao.cidade}} /
-                    {{irmao.uf}}</a></span>
-            </li>
-        {% endfor %}
-    </ul>
 </div>
 {% endblock %}
 </html>

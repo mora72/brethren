@@ -12,8 +12,6 @@
     display: none;
 }
 
-
-
 /* Navbar */
 
 /* coloca border abaixo no navbar, e estabelece margem para o que vem abaixo */
@@ -41,24 +39,27 @@
     text-transform: uppercase;
 }
 
-.lista-div {
-    padding: 0;
-}
+/* Lista Locais */
 
-.localview-div {
-    padding: 0;
-}
-
-.irmaoview-div {
-    padding: 0;
-}
-
-
-.lista-div h2 {
-    font-size: 25px;
+.listalocais-div h2 {
+    font-size: 22px;
     font-weight: bold;
     margin-left: 350px;
 }
+
+.lista-locais {
+    margin-left: 60px;
+}
+
+/* Lista Irmãos */
+
+.listairmaos-div h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 350px;
+}
+
+/* Local View */
 
 .localview-div h2 {
     font-size: 23px;
@@ -70,34 +71,37 @@
     color: blue;
 }
 
-/* Lista de locais */
+/* Irmão View */
 
-.lista-locais2 {
-    margin-left: 60px;
+.imageirmaoview {
+    position: absolute;
+    top: 80px;
+    left: 750px;
 }
 
-/* .item-locais {
-    list-style: none;
-    font-size: 17px;
-    height: 50px;
-    padding: 0 15px;
-    padding-top: 10px;
-    border-bottom: 1px dashed #CCC;
-} */
-
-/* Lista de irmaos */
-
-.lista-irmaos {
-    padding-left: 0;
+.h2irmaoview {
+    position: absolute;
+    font-size: 23px;
+    font-weight: bold;
+    color: blue;
+    top: 110px;
+    left: 270px;
 }
 
-.item-irmaos {
-    list-style: none;
-    font-size: 17px;
-    height: 50px;
-    padding: 0 15px;
-    padding-top: 10px;
-    border-bottom: 1px dashed #CCC;
+.irmaoview-div {
+    margin-top: 140px;
+}
+
+/* Distâncias */
+
+.distancias-div h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 30px;
+}
+
+.distancias-div {
+    margin-left: 360px;
 }
 
 /* filter uf*/
@@ -117,30 +121,42 @@
 .filterstatus-div {
     margin-bottom: 15px;
     padding: 0;
-    margin-left: 10px;
+    margin-left: 120px;
 }
 
 #filterstatus {
     display: inline-block;
-    width: 200px;
+    width: 180px;
     margin-left: 10px;
 }
 
 
 /* Search */
-
-
 .flex-container {
   display: flex;
   flex-direction: row;
 }
 
-.search-div {
+.searchlocal-div {
     position: absolute;
     padding: 0;
     margin-left: 420px;
     margin-bottom: 15px;
     width: 400px;
+}
+
+.searchirmao-div {
+    padding: 0;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    width: 400px;
+}
+
+.searchlocalinteresse-div {
+    padding: 0;
+    margin-left: 70px;
+    margin-bottom: 15px;
+    width: 330px;
 }
 
 .bot-search-local {
@@ -165,20 +181,4 @@
     top: 12px;
     right: 16px;
     cursor: pointer;  /* pointer para a lupa */
-}
-
-.searchirmao-div {
-    padding: 0;
-    margin-left: 10px;
-    margin-bottom: 15px;
-    display: inline-block;
-    width: 400px;
-}
-
-.searchlocalinteresse-div {
-    padding: 0;
-    margin-left: 10px;
-    margin-bottom: 15px;
-    display: inline-block;
-    width: 400px;
 }

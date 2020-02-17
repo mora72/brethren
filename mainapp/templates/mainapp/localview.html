@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="offset-3 col-8 localview-div">
-    <h2>Localidade: {{local.nomelocal}}</h2>
+    <h2>{{local.nomelocal}}</h2>
     <form method="POST">
         {% csrf_token %}
         {% crispy form %}

@@ -5,12 +5,17 @@
     <img src='/static/outro/fotostaticmora.jpg' width="200">
 -->
 {% block content %}
-<div class="offset-1 col-4 irmaoview-div">
-    <h2>Irmão: {{irmao.nome}}</h2>
-    <img src="{{irmao.imagefoto.url}}" width="200"/>
+<div class="headerirmaoview">
+    <h2 class="h2irmaoview">{{irmao.nome}}</h2>
+    <img class="imageirmaoview" src="{{irmao.imagefoto.url}}" width="100"/>
+</div>
+<div class="offset-2 col-10 irmaoview-div">
     <form method="POST">
         {% csrf_token %}
-        {{ form|crispy }}
+        {% crispy form %}
     </form>
+    <a id="btnvoltar" href="/irmaos/">
+        <button type="button" class="btn btn-primary">Voltar</button>
+    </a>
 </div>
 {% endblock %}
