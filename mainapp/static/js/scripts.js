@@ -1,5 +1,20 @@
 $( document ).ready(function() {
 
+    // configuração do botão deletar
+    var deleteBtn = $('#btnlocaldelete');
+    $(deleteBtn).on('click', function(e) {
+
+        e.preventDefault();
+
+        var delLink = $(this).attr('href');
+        var result = confirm('Confirma remoção deste local ? ');
+
+        if(result) {
+            window.location.href = delLink;
+        }
+
+    });
+
     // configuração do filtro uf
     var filteruf     = $('#filteruf');
     var baseUrl   = 'http://localhost:8000/';

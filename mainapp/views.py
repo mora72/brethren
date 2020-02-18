@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Local, Irmao, Uf, Distancia
-from .forms import LocalForm, IrmaoForm
+from .forms import LocalForm, LocalFormEdit, IrmaoForm
 from .modulosbrethren import calcula_distancia
+from django.contrib import messages
+from django.contrib.auth import get_user_model
 
 
 def main_menu(request):
@@ -58,8 +60,59 @@ def distancias(request):
                                                        'localinteresse': local_interesse})
 
 
-def teste(request):
+def teste():
     new_uf = Uf(id=1)
     new_distancia = Distancia(origem='origemteste', cidade_destino='cidadeteste', uf_destino=new_uf,
                               distancia=10)
+
     new_distancia.save()
+
+
+def local_delete(request, idlocal):
+    local = get_object_or_404(Local, pk=idlocal)
+    local.delete()
+
+    messages.info(request, f'Localidade "{local.nomelocal}" removida com Sucesso !')
+
+    return redirect('/')
+
+
+def local_new(request):
+    print('z', request.method)
+    usuariomodel = get_user_model()
+    usuariodef = get_object_or_404(usuariomodel, pk=1)
+    if request.method == 'POST':
+        form = LocalFormEdit(request.POST)
+
+        print('a', form.is_valid())
+        if form.is_valid():
+            print('1')
+            local = form.save(commit=False)
+            print('2')
+            local.usuario = usuariodef
+            print('3')
+            local.save()
+            print('4')
+            return redirect('/')
+        else:
+            print('b', form.errors)
+    else:
+        print('c', 'aqui')
+        form = LocalFormEdit()
+        return render(request, 'mainapp/localnew.html', {'form': form})
+
+
+def local_edit(request, idlocal):
+    local = get_object_or_404(Local, pk=idlocal)
+    form = LocalFormEdit(instance=local)
+
+    if request.method == 'POST':
+        form = LocalFormEdit(request.POST, instance=local)
+
+        if form.is_valid():
+            local.save()
+            return redirect('/')
+        else:
+            return render(request, 'mainapp/localedit.html', {'form': form, 'local': local})
+    else:
+        return render(request, 'mainapp/localedit.html', {'form': form, 'local': local})

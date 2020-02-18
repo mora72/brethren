@@ -182,3 +182,13 @@
     right: 16px;
     cursor: pointer;  /* pointer para a lupa */
 }
+
+/* Messages */
+
+.messagelist {
+    margin-left: 125px;
+    width: 700px;
+    text-align: center;
+    list-style: none;
+}
+

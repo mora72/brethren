@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Adicionar Localidade{% endblock %}
+
+{% block content %}
+<div class="offset-3 col-8 localview-div">
+    <h1>Adicione a nova Localidade:</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {% crispy form %}
+        <!-- <input type="submit" class="btn btn-success" value="Criar Localidade"> -->
+        <a id="btnvoltar" href="/">
+            <button type="button" class="btn btn-info">Cancelar</button>
+        </a>
+    </form>
+</div>
+{% endblock %}

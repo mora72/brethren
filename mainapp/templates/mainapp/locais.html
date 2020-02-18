@@ -5,6 +5,7 @@
 {% block content %}
 <div class="offset-1 col-9 listalocais-div">
     <h2>Localidades com Reuniões</h2>
+
     <div class="flex-container">
         <!-- Configuração da ação do filtro -->
         <div class="col-12 column filteruf-div">
@@ -28,6 +29,15 @@
             </form>
         </div>
     </div>
+
+    {% if messages %}
+    {% for message in messages %}
+    <ul class="messagelist">
+        <li {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible" {% endif %} > <strong>{{message}}</strong> </li>
+    </ul>
+    {% endfor %}
+    {% endif %}
+
     <div class="container lista-locais">
         <table class="table">   <!--  table-bordered table-sm  -->
             <thead>
