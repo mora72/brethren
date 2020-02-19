@@ -15,7 +15,13 @@
         {% crispy form %}
     </form>
     <a id="btnvoltar" href="/irmaos/">
-        <button type="button" class="btn btn-primary">Voltar</button>
+        <button type="button" class="btn btn-info">Voltar</button>
+    </a>
+    <a id="btndelete" href="/irmao/delete/{{irmao.id}}">
+        <button type="button" class="btn btn-danger">Apagar</button>
+    </a>
+    <a id="btnirmaoedit" href="/irmao/edit/{{irmao.id}}">
+        <button type="button" class="btn btn-primary">Atualizar</button>
     </a>
 </div>
 {% endblock %}

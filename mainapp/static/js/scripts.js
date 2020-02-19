@@ -1,13 +1,13 @@
 $( document ).ready(function() {
 
     // configuração do botão deletar
-    var deleteBtn = $('#btnlocaldelete');
+    var deleteBtn = $('#btndelete');
     $(deleteBtn).on('click', function(e) {
 
         e.preventDefault();
 
         var delLink = $(this).attr('href');
-        var result = confirm('Confirma remoção deste local ? ');
+        var result = confirm('Confirma remoção ? ');
 
         if(result) {
             window.location.href = delLink;
@@ -44,7 +44,15 @@ $( document ).ready(function() {
     // Ação do filtro status (change)
     $(filterstatus).change(function() {
         var filterstatus = $(this).val();
-        window.location.href = baseUrlIrmaos + '?filterstatus=' + filterstatus;
+        var filterlocal = $('#filterlocal').val();
+        window.location.href = baseUrlIrmaos + '?filterstatus=' + filterstatus + '&filterlocal=' + filterlocal;
+    });
+
+    // Ação do filtro local (change)
+    $(filterlocal).change(function() {
+        var filterlocal = $(this).val();
+        var filterstatus = $('#filterstatus').val();
+        window.location.href = baseUrlIrmaos + '?filterlocal=' + filterlocal + '&filterstatus=' + filterstatus;
     });
 
     // Ação da busca Local (click)

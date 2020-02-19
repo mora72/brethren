@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Adicionar Localidade{% endblock %}
+{% block title %}Editar Localidade{% endblock %}
 
 {% block content %}
-<div class="offset-3 col-8 localnew-div">
-    <h2>Adicione a nova Localidade:</h2>
+<div class="offset-3 col-8 localedit-div">
+    <h2>Edite a Localidade:</h2>
     <form method="POST">
         {% csrf_token %}
         {% crispy form %}

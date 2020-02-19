@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Editar Irmão{% endblock %}
+
+{% block content %}
+<div class="headerirmaoview">
+    <h2 class="h2irmaoview">{{irmao.nome}}</h2>
+    <img class="imageirmaoview" src="{{irmao.imagefoto.url}}" width="100"/>
+</div>
+<div class="offset-2 col-10 irmaoedit-div">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+</div>
+{% endblock %}

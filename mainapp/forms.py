@@ -1,7 +1,7 @@
 from django import forms
 from .models import Local, Irmao
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Row, Column, Submit
+from crispy_forms.layout import Layout, Row, Column, Submit, HTML
 from django.forms.widgets import Select
 
 
@@ -53,7 +53,6 @@ class LocalFormEdit(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(LocalFormEdit, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
-
         self.helper.layout = Layout(
             Row(
                 Column('nomelocal', css_class='form-group col-md-4 mb-0')
@@ -74,7 +73,8 @@ class LocalFormEdit(forms.ModelForm):
             Row(
                 Column('statuslocal', css_class='form-group col-md-4 mb-0')
             ),
-            Submit('submit', 'Criar')
+            Submit('submit', 'Salvar'),
+            HTML('<a class="btn btn-danger" href="/">Voltar</a>')
         )
 
     class Meta:
@@ -137,4 +137,55 @@ class IrmaoForm(forms.ModelForm):
             'telefonecontato': 'Contato: ',
             'emailcontato': 'Email: ',
             'status': 'Situação: '
+        }
+
+
+class IrmaoFormEdit(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(IrmaoFormEdit, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+        self.helper.layout = Layout(
+            Row(
+                Column('nome', css_class='form-group col-md-4 mb-0')
+            ),
+            #  Row(Column('imagefoto', css_class='form-group col-md-6 mb-0')),
+            Row(
+                Column('local', css_class='form-group col-md-3 mb-0'),
+                Column('cidade', css_class='form-group col-md-3 mb-0'),
+                Column('uf', css_class='form-group col-md-3 mb-0')
+            ),
+            Row(
+                Column('telefonecontato', css_class='form-group col-md-2 mb-0'),
+                Column('emailcontato', css_class='form-group col-md-4 mb-0')
+            ),
+            Row(
+                Column('genero', css_class='form-group col-md-2 mb-0'),
+                Column('estadocivil', css_class='form-group col-md-2 mb-0'),
+                Column('datanasc', css_class='form-group col-md-2 mb-0')
+            ),
+            Row(
+                Column('status', css_class='form-group col-md-3 mb-0')
+            ),
+            'imagefoto',
+            Submit('submit', 'Salvar'),
+            HTML('<a class="btn btn-danger" href="/irmaos/">Voltar</a>')
+        )
+
+    class Meta:
+        model = Irmao
+        fields = ('nome', 'local', 'cidade', 'uf', 'genero', 'datanasc', 'estadocivil',
+                  'telefonecontato', 'emailcontato', 'status', 'imagefoto')
+        labels = {
+            'nome': 'Nome do Irmão: ',
+            'local': 'Localidade: ',
+            'cidade': 'Cidade: ',
+            'uf': 'UF: ',
+            'genero': 'Gênero: ',
+            'datanasc': 'Data Nascimento: ',
+            'estadocivik': 'Estado Civil: ',
+            'telefonecontato': 'Contato: ',
+            'emailcontato': 'Email: ',
+            'status': 'Situação: ',
+            'imagefoto': 'Foto: '
         }

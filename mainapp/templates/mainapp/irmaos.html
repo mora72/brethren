@@ -5,9 +5,23 @@
 {% block title %}Brethren{% endblock %}
 
 {% block content %}
-<div class="offset-2 col-9 listairmaos-div">
+<div class="offset-0 col-11 listairmaos-div">
     <h2>Irmãos Reunidos</h2>
     <div class="flex-container">
+        <!-- Configuração da ação do filtro -->
+        <div class="col-5 column filterlocal-div">
+            <span>Filtrar Localidade:</span>
+            <select name="filterlocal" id="filterlocal" class="form-control">
+                <option value="0">Todas</option>
+                {% for localitem in listalocais %}
+                {% if filterlocalatual == localitem.id %}
+                    <option value="{{ localitem.id }}" selected>{{ localitem.nomelocal }}</option>
+                {% else %}
+                    <option value="{{ localitem.id }}">{{ localitem.nomelocal }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
         <!-- Configuração da ação do filtro Status -->
         <div class="col-4 filterstatus-div">
             <span>Filtrar Status:</span>
@@ -47,9 +61,20 @@
                 <i class="fas fa-search bot-search-irmao" id="searchirmao-btn"></i>
             </form>
         </div>
+        <!-- Configuração do botão criar -->
+        <a class="fas fa-plus btn btn-primary" id="btnirmaonew" href="/irmaonew">&nbsp Criar</a>
     </div>
+
+    {% if messages %}
+    {% for message in messages %}
+    <ul class="messagelist">
+        <li {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible" {% endif %} > <strong>{{message}}</strong> </li>
+    </ul>
+    {% endfor %}
+    {% endif %}
+
     <div class="container lista-irmaos">
-        <table class="table">
+        <table class="table table-irmaos">
             <thead>
             <tr>
                 <th>Foto</th>
@@ -57,16 +82,23 @@
                 <th>Localidade</th>
                 <th>Cidade</th>
                 <th>UF</th>
+                <th>Situação</th>
             </tr>
             </thead>
+
             <tbody>
             {% for irmao in listairmaos %}
             <tr>
-                <td><img src="{{irmao.imagefoto.url}}" width="35"/></td>
+                <td>
+                    <div class="circle">
+                        <img src="{{irmao.imagefoto.url}}"/>
+                    </div>
+                </td>
                 <td><span><a href="/irmao/{{irmao.id}}">{{irmao.nome}}</a></span></td>
                 <td>{{irmao.local}}</td>
                 <td>{{irmao.cidade}}</td>
                 <td>{{irmao.uf}}</td>
+                <td>{{irmao.status}}</td>
             </tr>
             {% endfor %}
             </tbody>
