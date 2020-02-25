@@ -18,6 +18,7 @@ def local_list(request):
     if filteruf:
         if filteruf != 0:
             lista_locais = lista_locais.filter(uf=filteruf).order_by('nomelocal')
+    #  print(lista_locais.query)
     return render(request, 'mainapp/locais.html', {'listalocais': lista_locais, 'filterufatual': filteruf,
                                                    'listaufs': base_ufs})
 
